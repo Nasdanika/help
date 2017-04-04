@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.nasdanika.help.feature"
+      label="Help Feature"
+      version="1.0.0.qualifier">
+
+   <description>
+      Help plug-in with the anchor for other Nasdanika help content to link  to.
+   </description>
+
+   <copyright>
+      Property of Nasdanika LLC, all rights reserved.
+   </copyright>
+
+   <license url="https://www.eclipse.org/legal/epl-v10.html">
+      Eclipse public license
+   </license>
+
+   <plugin
+         id="org.nasdanika.help"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>

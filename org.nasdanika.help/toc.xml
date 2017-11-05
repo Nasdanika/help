@@ -3,6 +3,7 @@
 
 <toc label="Nasdanika">
    <anchor id="Nasdanika"/>
-   <topic href="doc/references.html" label="References">
+   <topic href="doc/markdown-content-producer.md.html" label="Markdown Content Producer"/>
+   <topic href="doc/references.md.html" label="References">
    </topic>
 </toc>

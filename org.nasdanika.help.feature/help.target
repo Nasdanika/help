@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="help" sequenceNumber="1">
+<locations>
+<location path="${eclipse_home}" type="Profile"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.nasdanika.third-party.feature.feature.group" version="0.1.0.201707110427"/>
+<repository location="http://www.nasdanika.org/third-party/org.nasdanika.third-party.repository/target/repository"/>
+</location>
+</locations>
+</target>

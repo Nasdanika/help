@@ -6,7 +6,6 @@ import java.net.URI;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.nasdanika.help.markdown.WikiLinkProcessor.LinkInfo;
-import org.nasdanika.help.markdown.WikiLinkProcessor.Renderer;
 import org.nasdanika.help.markdown.WikiLinkProcessor.Resolver;
 import org.pegdown.LinkRenderer;
 import org.pegdown.ast.ExpImageNode;
@@ -18,30 +17,19 @@ import org.pegdown.ast.WikiLinkNode;
 public class MarkdownLinkRenderer extends LinkRenderer {
 
 	private WikiLinkProcessor wikiLinkProcessor;
-	private WikiLinkProcessor.LinkInfo.Registry linkRegistry;
-	private WikiLinkProcessor.Resolver.Registry resolverRegistry;
-	private URI baseURI;
 
-	public MarkdownLinkRenderer(
-			URI baseURI, 
-			Renderer.Registry rendererRegistry, 
-			Resolver.Registry resolverRegistry, 
-			LinkInfo.Registry linkRegistry) {
-		this.baseURI = baseURI;
+	public MarkdownLinkRenderer() {
 		this.wikiLinkProcessor = new WikiLinkProcessor(
-				rendererRegistry, 
-				resolverRegistry, 
-				linkRegistry);
-		
-		this.resolverRegistry = resolverRegistry;
-		this.linkRegistry = linkRegistry;
+				getRendererRegistry(), 
+				getResolverRegistry(), 
+				getLinkRegistry());
 	}
 	
-	protected Rendering createRendering(String href, String text, String title) {
-		if (href!=null && resolverRegistry!=null) {
+	protected Rendering createRendering(String href, String text, String title, boolean rewriteURL) {
+		if (href!=null && getResolverRegistry()!=null) {
 			int idx = href.indexOf(':');
 			if (idx!=-1) {
-				Resolver resolver = resolverRegistry.getResolver(href.substring(0, idx));
+				Resolver resolver = getResolverRegistry().getResolver(href.substring(0, idx));
 				if (resolver!=null) {
 					String newHref = resolver.resolve(href.substring(idx+1));
 					if (newHref!=null) {
@@ -50,7 +38,7 @@ public class MarkdownLinkRenderer extends LinkRenderer {
 				}
 			}
 		}
-		LinkInfo linkInfo = linkRegistry==null || href==null ? null : linkRegistry.getLinkInfo(href);
+		LinkInfo linkInfo = getLinkRegistry()==null || href==null ? null : getLinkRegistry().getLinkInfo(href);
 		if (DocUtil.isBlank(text)) {
 			if (linkInfo!=null) {
 				text = linkInfo.getLabel(); 
@@ -68,10 +56,14 @@ public class MarkdownLinkRenderer extends LinkRenderer {
 				text = text.replace('_', ' ');				
 			}
 		}				
-
-		if (href!=null && baseURI != null) {
-			href = baseURI.resolve(href).toString();
-		}
+		
+		if (href!=null) {
+			if (rewriteURL && getURLRewriter()!=null) {
+				href = getURLRewriter().rewrite(href);
+			} else if (getBaseURI() != null) {
+				href = getBaseURI().resolve(href).toString();
+			}
+		}		
 		
 		boolean isMissing = href==null || (linkInfo!=null && linkInfo.isMissing());
 		String iconTag = linkInfo==null ? null : linkInfo.getIconTag();
@@ -95,20 +87,24 @@ public class MarkdownLinkRenderer extends LinkRenderer {
         return ret;		
 	}
 		
-    public Rendering render(ExpLinkNode node, String text) {
-    	return createRendering(node.url, text, node.title);
+    private URLRewriter getURLRewriter() {
+		return null;
+	}
+
+	public Rendering render(ExpLinkNode node, String text) {
+    	return createRendering(node.url, text, node.title, true);
     }
 
     public Rendering render(ExpImageNode node, String text) {
-    	return createRendering(node.url, text, node.title);
+    	return createRendering(node.url, text, node.title, false);
     }
 
     public Rendering render(RefLinkNode node, String url, String title, String text) {
-    	return createRendering(url, text, title);
+    	return createRendering(url, text, title, true);
     }
 
     public Rendering render(RefImageNode node, String url, String title, String alt) {
-    	return createRendering(url, alt, title);
+    	return createRendering(url, alt, title, false);
     }
 
     public Rendering render(WikiLinkNode node) {
@@ -121,6 +117,22 @@ public class MarkdownLinkRenderer extends LinkRenderer {
 	 * @return
 	 */
 	protected String getLinkTarget(String href) {
+		return null;
+	}
+
+	protected WikiLinkProcessor.Resolver.Registry getResolverRegistry() {
+		return null;
+	}
+
+	protected WikiLinkProcessor.Renderer.Registry getRendererRegistry() {
+		return null;
+	}
+
+	protected WikiLinkProcessor.LinkInfo.Registry getLinkRegistry() {
+		return null;
+	}
+
+	protected URI getBaseURI() {
 		return null;
 	}
 		

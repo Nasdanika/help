@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface WikiLinkResolver {
 
-	String resolve(String spec, String docRoutePath, Map<Object, Object> environment); 
+	String resolve(String spec, Map<Object, Object> environment); 
 	
 }

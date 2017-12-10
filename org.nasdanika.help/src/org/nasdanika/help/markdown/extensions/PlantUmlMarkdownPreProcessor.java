@@ -13,8 +13,6 @@ import org.nasdanika.help.markdown.MarkdownPreProcessor;
 import net.sourceforge.plantuml.FileFormat;
 import net.sourceforge.plantuml.FileFormatOption;
 import net.sourceforge.plantuml.SourceStringReader;
-import net.sourceforge.plantuml.code.Transcoder;
-import net.sourceforge.plantuml.code.TranscoderUtil;
 
 /**
  * Uses PlantUML (http://plantuml.com/) EPL version to convert textual definitions of diagrams to SVG.
@@ -58,6 +56,8 @@ public class PlantUmlMarkdownPreProcessor implements MarkdownPreProcessor {
 			// TODO - support of remote PlantUML server.			
 //			Transcoder transcoder = TranscoderUtil.getDefaultTranscoder();
 //	        String url = transcoder.encode(content);
+//			Example - http://www.plantuml.com/plantuml/svg/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
+//			Load URL from org.nasdanika.help.markdown.extensions.PlantUmlMarkdownPreProcessor.server property
 	        // Send to the server, specify that we want SVG back.
 	        
 			SourceStringReader reader = new SourceStringReader(content);

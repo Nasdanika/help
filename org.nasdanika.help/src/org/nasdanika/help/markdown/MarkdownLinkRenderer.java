@@ -87,7 +87,7 @@ public class MarkdownLinkRenderer extends LinkRenderer {
         return ret;		
 	}
 		
-    private URLRewriter getURLRewriter() {
+    protected URLRewriter getURLRewriter() {
 		return null;
 	}
 

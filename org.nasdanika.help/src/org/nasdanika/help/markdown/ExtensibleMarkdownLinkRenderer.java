@@ -1,7 +1,7 @@
 package org.nasdanika.help.markdown;
 
 /**
- * Uses Eclipse extensions to discover link renderers and resolvers, and markdown pre-processors.
+ * Uses Eclipse extensions to discover link renderers and resolvers.
  * @author Pavel
  *
  */

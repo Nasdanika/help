@@ -130,8 +130,7 @@ public class MarkdownContentProducer implements IHelpContentProducer {
 		if (start<content.length()) {
 			out.append(content.substring(start));
 		}
-		return out.toString();
-		
+		return out.toString();		
 	}
 
 }

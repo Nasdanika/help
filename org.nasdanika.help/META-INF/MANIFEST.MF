@@ -11,4 +11,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang3;bundle-version="3.3.2",
  net.sourceforge.plantuml;bundle-version="8042.0.0"
 Import-Package: org.osgi.framework
-Export-Package: org.nasdanika.help.markdown
+Export-Package: org.nasdanika.help.markdown,
+ org.nasdanika.help.markdown.extensions

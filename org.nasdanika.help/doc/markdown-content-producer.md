@@ -48,7 +48,7 @@ Definition
 @enduml
 ```	 
 
-Diagram
+Diagram (shall be opened in the Eclipse Help System)
 
 @startuml
 	Alice -> Bob

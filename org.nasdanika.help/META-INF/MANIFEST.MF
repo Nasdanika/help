@@ -5,9 +5,8 @@ Bundle-SymbolicName: org.nasdanika.help;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Nasdanika LLC
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.help,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.help,
- org.eclipse.core.runtime,
  org.pegdown;bundle-version="1.6.0",
  org.apache.commons.lang3;bundle-version="3.3.2",
  net.sourceforge.plantuml;bundle-version="8042.0.0"
